@@ -1,0 +1,52 @@
+﻿@using ShortURL.Models.DB;
+@model IEnumerable<Url>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Список URL</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create new Url
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Url</th>
+                    <th>Короткий Url</th>
+                    <th>Дата создания</th>
+                    <th>Количество переходов</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="30%"><a href="@obj.LongUrl">@obj.LongUrl</a></td>
+                        <td width="10%"><a href="@obj.ShortUrl">@obj.ShortUrl</a></td>
+                        <td width="20%">@obj.CreationDate</td>
+                        <td width="20%">@obj.TransitionСount</td>
+                        <td class="text-center">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-route-Id="@obj.Id" asp-action="Update" class="btn btn-light mx-2">Update</a>
+                                <a asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Doesn't have any links</p>
+    }
+</div>

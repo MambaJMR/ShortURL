@@ -1,0 +1,28 @@
+﻿@using ShortURL.Models.DB;
+@model Url
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Новый короткий Url</h1>
+
+<h4>ModelUrl</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div>
+                <label asp-for="LongUrl" class="control-label"></label>
+                <input asp-for="LongUrl" class="form-control" />
+                <span asp-validation-for="LongUrl" class="text-danger"></span>
+            </div>           
+            <div class="d-flex m-2">
+                <a asp-action="Index" class="btn btn-light w-100px me-2">Back</a>
+                <input type="submit" value="Создаем новый короткий Url" class="btn btn-primary" />                
+            </div>
+        </form>
+    </div>
+</div>

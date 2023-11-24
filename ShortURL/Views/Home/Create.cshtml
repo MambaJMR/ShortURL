@@ -1,0 +1,80 @@
+﻿@using ShortURL.Models.DB;
+@model Url
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    p{
+        margin: 0;
+    }
+</style>
+
+<h1>Create</h1>
+
+<h4>ModelUrl</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div >
+            <input type="text" id="LongUrl" />
+            <a id="btn" class="btn btn-primary">Create</a>
+        </div>
+        <div id="result"></div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-light mx-2" >Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script type='text/javascript'>
+
+    function CreateShortUrl() {
+        let longUrl = document.getElementById('LongUrl').value;
+        SendUrl(longUrl);
+    }
+
+    async function SendUrl(value) {
+        const method = 'POST';
+        const url = '/Home/Create';
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+
+        let result = document.getElementById('result');
+        try {
+            const responce = await fetch(url, { method, headers, body: JSON.stringify({ LongUrl: value }) });
+            if (!responce.ok) {
+                throw new Error(`Could not fetch ${url}, status: ${responce.status}`)
+            }            
+            let data = await responce.json();
+               
+            let link = `<a href="${data.longUrl}" class="text-white">${data.shortUrl}</a>`
+            let resultSc = getBg(link, "success");
+            result.innerHTML = resultSc;
+        }
+        catch (e) {
+            let resultSc = getBg(`<p class="text-white">${e.message}</p>`, "danger");
+            result.innerHTML = resultSc;
+        }
+    }
+
+    function getBg(value, result) {
+        return `<div class="p-3 m-2 bg-${result}">${value}</div>`
+    };
+
+
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', CreateShortUrl)
+
+</script>
