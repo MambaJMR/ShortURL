@@ -8,7 +8,7 @@
         </div>
         <div class="col-6 text-end">
             <a asp-action="Create" class="btn btn-primary">
-                <i class="fas fa-plus"></i> &nbsp; Create new Url
+                Создать
             </a>
         </div>
     </div>
@@ -36,8 +36,8 @@
                         <td width="20%">@obj.TransitionСount</td>
                         <td class="text-center">
                             <div class="w-100 btn-group" role="group">
-                                <a asp-route-Id="@obj.Id" asp-action="Update" class="btn btn-light mx-2">Update</a>
-                                <a asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">Delete</a>
+                                <a asp-route-Id="@obj.Id" asp-action="Update" class="btn btn-light mx-2">Обновить</a>
+                                <a asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">Удалить</a>
                             </div>
                         </td>
                     </tr>
@@ -47,6 +47,6 @@
     }
     else
     {
-        <p>Doesn't have any links</p>
+        <p>URL еще не добавлены</p>
     }
 </div>
