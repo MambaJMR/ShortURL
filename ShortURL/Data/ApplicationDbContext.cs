@@ -7,6 +7,7 @@ namespace ShortURL.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.Migrate();
         }
 
         public DbSet<Url> Urls { get; set; }
